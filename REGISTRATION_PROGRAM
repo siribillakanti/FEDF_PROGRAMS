@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Registration Form</title>
+    <style>
+        body {
+            font-family: Arial;
+        }
+
+        .container {
+            width: 300px;
+            margin: auto;
+            border: 1px solid black;
+            padding: 15px;
+        }
+
+        input {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2 style="text-align:center;">Registration Form</h2>
+
+    <div class="container">
+        <form onsubmit="return validateForm()">
+
+            Name:
+            <input type="text" id="name">
+
+            Email:
+            <input type="text" id="email">
+
+            Password:
+            <input type="password" id="password">
+
+            Confirm Password:
+            <input type="password" id="confirmPassword">
+
+            <button type="submit">Register</button>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            let confirmPassword = document.getElementById("confirmPassword").value;
+
+            if (name == "" || email == "" || password == "" || confirmPassword == "") {
+                alert("All fields are required");
+                return false;
+            }
+
+            if (!email.includes("@")) {
+                alert("Enter a valid email");
+                return false;
+            }
+
+            if (password.length < 6) {
+                alert("Password must be at least 6 characters");
+                return false;
+            }
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match");
+                return false;
+            }
+
+            alert("Registration Successful!");
+            return true;
+        }
+    </script>
+
+</body>
+
+</html>
