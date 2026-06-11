@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student Result Processing System</title>
+</head>
+
+<body>
+
+    <h2>Student Result Processing System</h2>
+
+    <div id="output"></div>
+
+    <script>
+
+        // Student class
+        class Student {
+
+            constructor(name, sem1Marks, sem2Marks) {
+
+                this.name = name;
+
+                // Using spread operator to merge marks
+                this.marks = [...sem1Marks, ...sem2Marks];
+            }
+
+            // Arrow function to calculate total
+            calculateTotal = () => {
+                return this.marks.reduce((sum, mark) => sum + mark, 0);
+            }
+
+            // Arrow function to calculate average
+            calculateAverage = () => {
+                return (this.calculateTotal() / this.marks.length).toFixed(2);
+            }
+
+            // Display result
+            displayResult = () => {
+
+                // Destructuring
+                const { name, marks } = this;
+
+                return `
+                    <h3>Student Name: ${name}</h3>
+                    <p>Marks: ${marks.join(", ")}</p>
+                    <p>Total Marks: ${this.calculateTotal()}</p>
+                    <p>Average Marks: ${this.calculateAverage()}</p>
+                    <hr>
+                `;
+            }
+        }
+
+        // Using let and const
+        const student1 = new Student(
+            "Anu",
+            [78, 85, 90],
+            [88, 76, 95]
+        );
+
+        const student2 = new Student(
+            "Siri",
+            [92, 81, 87],
+            [90, 89, 94]
+        );
+
+        let result = "";
+
+        result += student1.displayResult();
+        result += student2.displayResult();
+
+        // Displaying in browser
+        document.getElementById("output").innerHTML = result;
+
+    </script>
+
+</body>
+
+</html>
