@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Library Book Management</title>
+</head>
+
+<body>
+
+    <h2>Library Book List</h2>
+    <div id="output"></div>
+
+    <script>
+
+        class Book {
+            constructor(title, author, price, ...extraPrices) {
+                this.title = title;
+                this.author = author;
+                this.price = price;
+                this.extraPrices = extraPrices;
+            }
+
+
+            calculateFinalPrice = () => {
+                return this.extraPrices.reduce((total, val) => total + val, this.price);
+            }
+        }
+
+        // Create multiple books
+        const book1 = new Book("Harry Potter", "J.K. Rowling", 500, 50, -30);
+        const book2 = new Book("Atomic Habits", "James Clear", 400, 20, -10, 15);
+        const book3 = new Book("The Alchemist", "Paulo Coelho", 300, -20);
+
+        const books = [book1, book2, book3];
+
+        let output = "";
+
+        books.forEach(book => {
+            // Destructuring
+            const { title, author } = book;
+            const finalPrice = book.calculateFinalPrice();
+
+
+            output += `
+            <p>
+                <strong>Title:</strong> ${title} <br>
+                <strong>Author:</strong> ${author} <br>
+                <strong>Final Price:</strong> ₹${finalPrice}
+            </p>
+            <hr>
+        `;
+        });
+
+        document.getElementById("output").innerHTML = output;
+
+    </script>
+
+</body>
+
+</html>
